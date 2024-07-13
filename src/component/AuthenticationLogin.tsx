@@ -27,6 +27,7 @@ const AuthenticationLogin = ({setOpenPage}) => {
           </label>
           <input
             type="email"
+            name="email"
             value={formik.email}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
@@ -44,6 +45,7 @@ const AuthenticationLogin = ({setOpenPage}) => {
           </label>
           <input
             type="password"
+            name="password"
             value={formik.password}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
@@ -51,7 +53,7 @@ const AuthenticationLogin = ({setOpenPage}) => {
             required
           />
         </div>
-        <div className="flex items-center mb-3 text-xs">Don't have Account? <div className="text-blue-400  ml-2" onClick={()=>{setOpenPage("SignUp")}}>Sign Up</div></div>
+        <div className="flex items-center mb-3 text-xs">Don't have Account? <div className="text-blue-400  ml-2 cursor-pointer" onClick={()=>{setOpenPage("SignUp")}}>Sign Up</div></div>
         
         <button
           type="submit"
