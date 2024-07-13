@@ -6,7 +6,7 @@ const Navbar = () => {
 
   useEffect(() => {
     const storedTheme = localStorage.getItem("theme");
-    if (storedTheme === "dark") {
+    if (storedTheme !== "light") {
       document.documentElement.classList.add("dark");
       setDarkMode(true);
     }
@@ -24,7 +24,7 @@ const Navbar = () => {
   };
 
   return (
-    <div className="flex  dark:bg-gray-600 justify-between px-4 py-2 border-b-2 dark:border-black border-gray-700">
+    <div className="flex bg-blue-200 dark:bg-gray-800 justify-between px-4 py-2 border-b-2 dark:border-black border-gray-700">
       <div className="flex items-center gap-2">
         <img src={logo} alt="Logo of Wordy" className="h-10 " />
         <p className="text-xl font-bold dark:text-white">Wordy</p>

@@ -3,7 +3,7 @@ import Navbar from '../component/Navbar'
 import axios from "axios"
 import {useFormik} from "formik"
 
-const Authentication = () => {
+const Authentication = ({page}) => {
     const formik=useFormik({
         initialValues: {
           username: "",
