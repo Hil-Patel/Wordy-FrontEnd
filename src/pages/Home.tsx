@@ -9,7 +9,7 @@ AOS.init();
 const Home = ({ setButtonClick }) => {
   
   return (
-    <div className="h-screen transition-colors duration-900">
+    <div className="h-screen flex flex-col transition-colors duration-300">
       <Navbar />
       <HowToPlay setButtonClick={setButtonClick}/>
     </div>

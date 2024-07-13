@@ -5,10 +5,10 @@ const HowToPlay = ({setButtonClick}) => {
     
   const navigate = useNavigate();
   return (
-    <div className="flex flex-col bg-gray-100 justify-center items-center dark:bg-gray-700 h-[91.9vh] overflow-hidden transition-colors duration-300">
+    <div className="flex flex-col bg-gray-100 justify-center items-center dark:bg-gray-700 flex-grow overflow-hidden transition-colors duration-300">
         <div
           data-aos="fade-up"
-          className="hover:shadow-xl bg-blue-100 dark:bg-gray-800 border border-gray-500 dark:border-gray-800 text-black dark:text-white p-4 max-w-md rounded-lg 0.5s ease-in-out"
+          className="hover:shadow-xl bg-blue-100 dark:bg-gray-800 border border-gray-500  text-black dark:text-white p-4 max-w-md rounded-lg 0.5s ease-in-out"
         >
           <h2 className="text-2xl font-bold mb-4">How To Play</h2>
           <p className="mb-4">Guess the Wordly in given tries.</p>
