@@ -5,12 +5,12 @@ const HowToPlay = ({setButtonClick}) => {
     
   const navigate = useNavigate();
   return (
-    <div className="flex flex-col bg-gray-100 justify-center items-center dark:bg-gray-700 flex-grow overflow-hidden transition-colors duration-300">
+    <div className="flex flex-col bg-gray-100 justify-center items-center dark:bg-gray-700 flex-grow  overflow-y-scroll scrollbar-hide transition-colors duration-300">
         <div
           data-aos="fade-up"
           className="hover:shadow-xl bg-blue-100 dark:bg-gray-800 border border-gray-500  text-black dark:text-white p-4 max-w-md rounded-lg 0.5s ease-in-out"
         >
-          <h2 className="text-2xl font-bold mb-4">How To Play</h2>
+          <h2 className="text-2xl font-bold  mb-4">How To Play</h2>
           <p className="mb-4">Guess the Wordly in given tries.</p>
           <ul className="list-disc list-inside mb-4">
             <li>Each guess must be a valid letter word.</li>
