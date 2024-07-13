@@ -1,5 +1,3 @@
-import React from 'react'
-import Navbar from '../component/Navbar'
 import { useFormik } from 'formik';
 import axios from 'axios';
 
@@ -19,7 +17,6 @@ const AuthenticationLogin = () => {
       });
   return (
     <div>
-      <Navbar/>
       <form onSubmit={formik.handleSubmit}>
        <input type="email"
       name='email'

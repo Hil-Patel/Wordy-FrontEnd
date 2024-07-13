@@ -4,49 +4,12 @@ import axios from "axios"
 import {useFormik} from "formik"
 
 const Authentication = ({page}) => {
-    const formik=useFormik({
-        initialValues: {
-          username: "",
-          email:"",
-          password: "",
-        },
-        onSubmit: async (values) => {
-            const res= await axios.post("http://localhost:8000/signup",
-                {
-                    userName:values.username,
-                    email:values.email,
-                    password:values.password,
-                })
-        },
-      });
   return (
-    <div>
+    <div className='flex flex-col h-screen dark:bg-gray-700 text-black dark:text-white'>
       <Navbar/>
-      <form onSubmit={formik.handleSubmit}>
-      <input type="text"
-      name='username'
-      value={formik.username}
-      onChange={formik.handleChange}
-      onBlur={formik.handleBlur}
-      placeholder='username'
-       />
-       <input type="email"
-      name='email'
-      value={formik.email}
-      onChange={formik.handleChange}
-      onBlur={formik.handleBlur}
-      placeholder='email'
-       />
-       <input type="text"
-      name='password'
-      value={formik.password}
-      onChange={formik.handleChange}
-      onBlur={formik.handleBlur}
-      placeholder='password'
-       />
-       <button type='submit' className='bg-gray-200 p-2'>sign in</button>
-
-      </form>
+      <div className='w-full flex-grow flex justify-center items-center'>
+        <div className='w-2/3 h-4/5 bg-blue-100 dark:bg-gray-800'>a</div>
+      </div>
     </div>
   )
 }

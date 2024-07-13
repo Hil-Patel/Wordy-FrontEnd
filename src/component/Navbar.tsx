@@ -24,14 +24,14 @@ const Navbar = () => {
   };
 
   return (
-    <div className="flex bg-blue-200 dark:bg-gray-800 justify-between px-4 py-2 border-b-2 dark:border-black border-gray-700">
+    <div className="flex bg-blue-200 dark:bg-gray-800 justify-between px-4 py-2 border-b-2 dark:border-black border-gray-700 transition-colors duration-300">
       <div className="flex items-center gap-2">
-        <img src={logo} alt="Logo of Wordy" className="h-10 " />
+        <img src={logo} alt="Logo of Wordy" className="h-10" />
         <p className="text-xl font-bold dark:text-white">Wordy</p>
       </div>
       <button
         onClick={toggleDarkMode}
-        className=" w-9 rounded-lg p-2 hover:bg-gray-100 dark:hover:bg-gray-500"
+        className=" w-9 rounded-lg p-2 hover:bg-gray-100 dark:hover:bg-gray-500 "
       >
         <svg
           className="fill-violet-700 block dark:hidden"
