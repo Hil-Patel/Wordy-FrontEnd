@@ -15,7 +15,7 @@ const AuthenticationLogin = ({ setOpenPage ,setToken,token}) => {
     onSubmit: async (values) => {
       const res = await LogInApi(values);
       if (res.success) {
-        toast.success(res.data);
+        toast.success(res.message);
       } else {
         toast.error(res.message);
       }

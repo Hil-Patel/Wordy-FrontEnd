@@ -15,7 +15,7 @@ const AuthenticationSignUp = ({ setOpenPage }) => {
     onSubmit: async (values) => {
       const res=await SignUpApi(values)
       if(res.success){
-        toast.success(res.data)
+        toast.success(res.message)
       }
       else{
         toast.error(res.message)
