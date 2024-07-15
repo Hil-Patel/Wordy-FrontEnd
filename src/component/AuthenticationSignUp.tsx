@@ -27,82 +27,82 @@ const AuthenticationSignUp = ({ setOpenPage }) => {
     <div className='w-1/2 my-auto'>
       <div className="text-center mb-5 font-bold">SIGN UP</div>
       <form className="max-w-sm mx-auto" onSubmit={formik.handleSubmit}>
-        <div className="mb-3">
-          <label
-            htmlFor="username"
-            className="block mb-1 text-sm font-medium text-gray-900 dark:text-white"
-          >
-            Your Username
-          </label>
+        <div className="relative z-0 mb-3">
           <input
             type="text"
             name="username"
             value={formik.values.username}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
-            className={`bg-gray-50 border ${formik.touched.username && formik.errors.username ? 'border-red-500' : 'border-gray-300'} text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500`}
-            placeholder="Username"
+            className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+            placeholder=""
           />
+          <label
+            htmlFor="username"
+            className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto"
+          >
+             Username
+          </label>
           {formik.touched.username && formik.errors.username ? (
             <div className="text-red-500 text-xs mt-1">{formik.errors.username}</div>
           ) : null}
         </div>
-        <div className="mb-3">
-          <label
-            htmlFor="email"
-            className="block mb-1 text-sm font-medium text-gray-900 dark:text-white"
-          >
-            Your email
-          </label>
+        <div className="relative z-0 mb-3">
           <input
             type="email"
             name="email"
             value={formik.values.email}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
-            className={`bg-gray-50 border ${formik.touched.email && formik.errors.email ? 'border-red-500' : 'border-gray-300'} text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500`}
-            placeholder="name@flowbite.com"
+            className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+            placeholder=""
           />
+          <label
+            htmlFor="email"
+            className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto"
+          >
+            Email
+          </label>
           {formik.touched.email && formik.errors.email ? (
             <div className="text-red-500 text-xs mt-1">{formik.errors.email}</div>
           ) : null}
         </div>
-        <div className="mb-3">
-          <label
-            htmlFor="password"
-            className="block mb-1 text-sm font-medium text-gray-900 dark:text-white"
-          >
-            Your password
-          </label>
+        <div className="relative z-0 mb-3">
           <input
             type="password"
             name="password"
-            placeholder='******'
+            placeholder=''
             value={formik.values.password}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
-            className={`bg-gray-50 border ${formik.touched.password && formik.errors.password ? 'border-red-500' : 'border-gray-300'} text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500`}
+            className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
           />
+          <label
+            htmlFor="password"
+            className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto"
+          >
+            Password
+          </label>
           {formik.touched.password && formik.errors.password ? (
             <div className="text-red-500 text-xs mt-1">{formik.errors.password}</div>
           ) : null}
         </div>
-        <div className="mb-3">
-          <label
-            htmlFor="confirmpassword"
-            className="block mb-1 text-sm font-medium text-gray-900 dark:text-white"
-          >
-            Confirm password
-          </label>
+        <div className="relative z-0 mb-5">
           <input
             type="password"
             name="confirmpassword"
-            placeholder='******'
+            placeholder=''
             value={formik.values.confirmpassword}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
-            className={`bg-gray-50 border ${formik.touched.confirmpassword && formik.errors.confirmpassword ? 'border-red-500' : 'border-gray-300'} text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500`}
+            className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
           />
+          <label
+            htmlFor="confirmpassword"
+            className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto"
+          >
+            Confirm password
+          </label>
           {formik.touched.confirmpassword && formik.errors.confirmpassword ? (
             <div className="text-red-500 text-xs mt-1">{formik.errors.confirmpassword}</div>
           ) : null}
@@ -110,7 +110,7 @@ const AuthenticationSignUp = ({ setOpenPage }) => {
         <div className="flex items-center mb-3 text-xs">
           Already have Account?{' '}
           <div
-            className="text-blue-400 ml-2 cursor-pointer"
+            className="text-blue-800 dark:text-blue-400 ml-2 cursor-pointer"
             onClick={() => {
               setOpenPage('Login');
             }}

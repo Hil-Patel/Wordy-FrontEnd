@@ -24,7 +24,7 @@ const Navbar = () => {
   };
 
   return (
-    <div className="flex bg-blue-200 dark:bg-gray-800 justify-between px-4 py-2 border-b dark:border-black border-gray-700 transition-colors duration-900">
+    <div className="flex bg-blue-200 dark:bg-gray-800 justify-between px-4 py-2 border-b dark:border-black border-gray-900 transition-colors duration-900">
       <div className="flex items-center gap-2">
         <img src={logo} alt="Logo of Wordy" className="h-10" />
         <p className="text-xl font-bold dark:text-white">Wordy</p>
