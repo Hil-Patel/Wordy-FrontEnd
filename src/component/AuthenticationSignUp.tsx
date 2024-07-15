@@ -3,7 +3,8 @@ import { useFormik } from 'formik';
 import {SignUp} from "../schema/SignUpSchema"
 import {SignUpApi} from "../ApiEndPoints/index.js"
 import { toast } from 'react-toastify';
-const AuthenticationSignUp = ({ setOpenPage }) => {
+
+const AuthenticationSignUp = ({ setOpenPage,setLoading }) => {
   const formik = useFormik({
     initialValues: {
       username: '',
@@ -13,7 +14,9 @@ const AuthenticationSignUp = ({ setOpenPage }) => {
     },
     validationSchema:SignUp,
     onSubmit: async (values) => {
+      setLoading(true)
       const res=await SignUpApi(values)
+      setLoading(false)
       if(res.success){
         toast.success(res.message)
         setOpenPage("Login")
@@ -25,6 +28,7 @@ const AuthenticationSignUp = ({ setOpenPage }) => {
   });
 
   return (
+    
     <div className='w-1/2 my-auto'>
       <div className="text-center mb-5 font-bold">SIGN UP</div>
       <form className="max-w-sm mx-auto" onSubmit={formik.handleSubmit} autoComplete="off">

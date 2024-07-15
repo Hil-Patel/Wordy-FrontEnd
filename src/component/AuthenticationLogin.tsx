@@ -4,7 +4,7 @@ import { Login } from "../schema/LogInSchema.js";
 import { LogInApi, ForgetPassword } from "../ApiEndPoints/index.js";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
-const AuthenticationLogin = ({ setOpenPage, setToken, token }) => {
+const AuthenticationLogin = ({ setOpenPage, setToken, token,setLoading }) => {
   const navigate = useNavigate();
   const formik = useFormik({
     initialValues: {
@@ -13,7 +13,9 @@ const AuthenticationLogin = ({ setOpenPage, setToken, token }) => {
     },
     validationSchema: Login,
     onSubmit: async (values) => {
+      setLoading(true)
       const res = await LogInApi(values);
+      setLoading(false)
       if (res.success) {
         toast.success(res.message);
       } else {
@@ -26,7 +28,9 @@ const AuthenticationLogin = ({ setOpenPage, setToken, token }) => {
     console.log(formik.values.email);
 
     if (formik.values.email) {
+      setLoading(true)
       const res = await ForgetPassword(formik.values.email);
+      setLoading(false)
       if (res.success) {
         toast.success(res.data.message);
         setToken(res.data.resetPasswordToken);
