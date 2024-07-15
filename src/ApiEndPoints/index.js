@@ -32,10 +32,21 @@ export const ForgetPassword=async(values)=>{
         const res=await axios.post(base_url+"/forget",{
             email:values,
         })
-        console.log(res);
         return {success:true,data:res.data}
     } catch (error) {
       console.log(error);
         return {success:false,message:error.response.data.message}
     }
+}
+
+export const Resetpassword=async(values)=>{
+  try {
+    const token = localStorage.getItem("ResetToken");
+    const res=await axios.post(base_url+"/reset/"+token,{
+      password:values.password
+    })
+    return {success:true,message:res.data.message};
+  } catch (error) {
+    return {success:false,message:error.response.data.message};
+  }
 }

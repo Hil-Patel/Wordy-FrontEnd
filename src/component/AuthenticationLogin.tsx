@@ -30,7 +30,7 @@ const AuthenticationLogin = ({ setOpenPage, setToken, token }) => {
       if (res.success) {
         toast.success(res.data.message);
         setToken(res.data.resetPasswordToken);
-        navigate(`/reset/${token}`);
+        localStorage.setItem("ResetToken",res.data.resetPasswordToken)
       } else {
         toast.error(res.message);
       }
@@ -41,7 +41,7 @@ const AuthenticationLogin = ({ setOpenPage, setToken, token }) => {
   return (
     <div className="w-1/2 my-auto">
       <div className="text-center mb-5 font-bold">LOG IN</div>
-      <form className="max-w-sm mx-auto" onSubmit={formik.handleSubmit}>
+      <form className="max-w-sm mx-auto" onSubmit={formik.handleSubmit} autoComplete="off">
         <div className="relative z-0 mb-3">
           <input
             type="email"
