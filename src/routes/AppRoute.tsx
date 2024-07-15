@@ -12,7 +12,6 @@ const AppRoute = () => {
         setToken(localStorage.getItem("ResetToken"));
       }
       console.log(token);
-      
     })
     
     
@@ -21,7 +20,7 @@ const AppRoute = () => {
         <Routes>
             <Route path="/" element={<Home setButtonClick={setButtonClick}/>} />
             <Route path="/authenticate" element={<Authentication page={buttonClick} setToken={setToken} token={token}/>}/>
-            {token!="" && <Route path={`/reset/${token}`} element={<ResetPassword/>}/>}
+            {token!="" && <Route path={`/reset/${token}`} element={<ResetPassword setButtonClick={setButtonClick}/>}/>}
             <Route path="*" element={<h1>error 404 no page found</h1>}></Route>
         </Routes>
     </BrowserRouter>

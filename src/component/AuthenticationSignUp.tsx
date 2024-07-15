@@ -16,6 +16,7 @@ const AuthenticationSignUp = ({ setOpenPage }) => {
       const res=await SignUpApi(values)
       if(res.success){
         toast.success(res.message)
+        setOpenPage("Login")
       }
       else{
         toast.error(res.message)

@@ -4,8 +4,10 @@ import { useFormik } from "formik";
 import {Reset} from "../schema/ResetPassword.js"
 import { Resetpassword} from "../ApiEndPoints/index.js";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
-const ResetPassword = () => {
+const ResetPassword = ({setButtonClick}) => {
+    const navigate=useNavigate();
   const formik = useFormik({
     initialValues: {
       password: "",
@@ -16,9 +18,12 @@ const ResetPassword = () => {
         const res=await Resetpassword(values)
         if (res.success) {
             toast.success(res.message);
+            setButtonClick("Login");
+            navigate("/authenticate")
           } else {
             toast.error(res.message);
           }
+
     },
   });
   return (
