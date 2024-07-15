@@ -10,3 +10,21 @@
     -ms-overflow-style: none; 
     scrollbar-width: none; 
   }
+  /* Apply these styles to your input fields */
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 30px #1a1a2e inset !important; /* Change #1a1a2e to your desired background color */
+    -webkit-text-fill-color: #fff !important; /* Change #fff to your desired text color */
+    transition: background-color 5000s ease-in-out 0s;
+}
+
+input:-webkit-autofill:focus {
+    border: 0px solid #ccc; /* Add your border style here */
+}
+
+input:-webkit-autofill:active {
+    border: 0px solid #ccc; /* Add your border style here */
+}

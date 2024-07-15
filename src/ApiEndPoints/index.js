@@ -8,9 +8,9 @@ export const LogInApi= async(values)=>{
           email: values.email,
           password: values.password,
         });
-        return {success:true,message:res.message};
+        return {success:true,message:res.data.message};
       } catch (error) {
-        return {success:false,message:error.message};
+        return {success:false,message:error.response.data.message};
       }
 }
 
@@ -21,9 +21,9 @@ export const SignUpApi= async(values)=>{
             email: values.email,
             password: values.password,
           });
-        return {success:true,message:res.message};
+        return {success:true,message:res.data.message};
       } catch (error) {
-        return {success:false,message:error.message};
+        return {success:false,message:error.response.data.message};
       }
 }
 
@@ -32,8 +32,10 @@ export const ForgetPassword=async(values)=>{
         const res=await axios.post(base_url+"/forget",{
             email:values,
         })
+        console.log(res);
         return {success:true,data:res.data}
     } catch (error) {
-        return {success:false,message:error.message}
+      console.log(error);
+        return {success:false,message:error.response.data.message}
     }
 }

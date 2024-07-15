@@ -28,8 +28,8 @@ const AuthenticationLogin = ({ setOpenPage, setToken, token }) => {
     if (formik.values.email) {
       const res = await ForgetPassword(formik.values.email);
       if (res.success) {
-        toast.success(res.message);
-        setToken(res.resetPasswordToken);
+        toast.success(res.data.message);
+        setToken(res.data.resetPasswordToken);
         navigate(`/reset/${token}`);
       } else {
         toast.error(res.message);
@@ -67,7 +67,7 @@ const AuthenticationLogin = ({ setOpenPage, setToken, token }) => {
         <div className="relative z-0 mb-5">
           
           <input
-            type="text"
+            type="password"
             name="password"
             placeholder=""
             value={formik.values.password}
