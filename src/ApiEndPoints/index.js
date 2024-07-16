@@ -55,7 +55,7 @@ export const Resetpassword=async(values)=>{
 export const preVerifyEmail=async(values)=>{
   try {
     localStorage.setItem("EmailToVerify",values.email)
-    const res=await axios.post(base_url+"/",{
+    const res=await axios.post(base_url+"/verifyEmail",{
       email:values.email
     })
     return {success:true,data:res.data}
@@ -66,7 +66,7 @@ export const preVerifyEmail=async(values)=>{
 export const postVerifyEmail=async(otp)=>{
   try {
     const storedEmail =localStorage.getItem("EmailToVerify")
-    const res=await axios.post(base_url+"/",{
+    const res=await axios.post(base_url+"/verifyEmailOTP",{
       email:storedEmail,
       OTP:otp
     })
