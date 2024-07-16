@@ -41,6 +41,7 @@ const AuthenticationSignUp = ({ setOpenPage, setLoading }) => {
 
   const handleVerifyEmail = async (e) => {
     e.preventDefault();
+    
     setLoading(true);
     const ress = await verifyEmail(formik.values.email);
     if (ress.success) {

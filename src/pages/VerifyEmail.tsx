@@ -21,7 +21,9 @@ const VerifyEmail = () => {
             navigate("/authenticate")
         }
         else{
-            toast.success(res.data.message)
+            toast.error(res.data.message)
+            setOtp("")
+            navigate("/verify-Email")
         }
     }else{
         toast.error(res.message)
