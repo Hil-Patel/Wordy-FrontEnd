@@ -1,7 +1,5 @@
 import React, { useState } from "react";
 import Navbar from "../component/Navbar";
-import axios from "axios";
-import { useFormik } from "formik";
 import AuthenticationLogin from "../component/AuthenticationLogin";
 import image from "../assets/wordy.png";
 import AuthenticationSignUp from "../component/AuthenticationSignUp";

@@ -21,6 +21,7 @@ const AuthenticationLogin = ({ setOpenPage, setToken, token,setLoading }) => {
       } else {
         toast.error(res.message);
       }
+      navigate("/options")
     },
   });
 

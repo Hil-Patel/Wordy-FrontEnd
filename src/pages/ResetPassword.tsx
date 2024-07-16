@@ -1,35 +1,43 @@
-import React from "react";
+import React, { useState } from "react";
 import Navbar from "../component/Navbar";
 import { useFormik } from "formik";
-import {Reset} from "../schema/ResetPassword.js"
-import { Resetpassword} from "../ApiEndPoints/index.js";
+import { Reset } from "../schema/ResetPassword.js";
+import { Resetpassword } from "../ApiEndPoints/index.js";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import { BeatLoader } from "react-spinners";
 
-const ResetPassword = ({setButtonClick}) => {
-    const navigate=useNavigate();
+const ResetPassword = ({ setButtonClick }) => {
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
   const formik = useFormik({
     initialValues: {
       password: "",
       confirmPassword: "",
     },
-    validationSchema:Reset,
+    validationSchema: Reset,
     onSubmit: async (values) => {
-        const res=await Resetpassword(values)
-        if (res.success) {
-            toast.success(res.message);
-            setButtonClick("Login");
-            navigate("/authenticate")
-          } else {
-            toast.error(res.message);
-          }
-
+      setLoading(true);
+      const res = await Resetpassword(values);
+      setLoading(false);
+      if (res.success) {
+        toast.success(res.message);
+        setButtonClick("Login");
+        navigate("/authenticate");
+      } else {
+        toast.error(res.message);
+      }
     },
   });
   return (
-    <div className="flex flex-col h-screen">
+    <div className="flex flex-col h-screen transition-colors duration-500">
       <Navbar />
-      <div className="bg-gray-100 dark:bg-gray-700 flex-grow flex justify-center items-center">
+      {loading ? (
+        <div className="absolute inset-0 bg-black bg-opacity-75 flex justify-center items-center z-50">
+          <BeatLoader color="#ffffff" />
+        </div>
+      ) : null}
+      <div className="bg-gray-100 dark:bg-gray-700 flex-grow flex justify-center items-center transition-colors duration-500">
         <div className="w-1/3 py-8 bg-blue-100 dark:bg-gray-800 rounded text-black dark:text-white">
           <div className="text-center mb-5 font-bold">Reset Password</div>
           <form
@@ -75,7 +83,8 @@ const ResetPassword = ({setButtonClick}) => {
               >
                 Confirm Password
               </label>
-              {formik.touched.confirmPassword && formik.errors.confirmPassword ? (
+              {formik.touched.confirmPassword &&
+              formik.errors.confirmPassword ? (
                 <div className="text-red-500 text-xs mt-1">
                   {formik.errors.confirmPassword}
                 </div>
