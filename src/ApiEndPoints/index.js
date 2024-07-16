@@ -52,11 +52,22 @@ export const Resetpassword=async(values)=>{
   }
 }
 
+export const verifyEmail=async(values)=>{
+  try {
+    const res=await axios.post(base_url+"/verifyFirst",{
+      email:values
+    })
+    return {success:true,data:res.data}
+  } catch (error) {
+    return {success:false,message:error.response.data.message}
+  }
+}
+
 export const preVerifyEmail=async(values)=>{
   try {
-    localStorage.setItem("EmailToVerify",values.email)
+    localStorage.setItem("EmailToVerify",values)
     const res=await axios.post(base_url+"/verifyEmail",{
-      email:values.email
+      email:values
     })
     return {success:true,data:res.data}
   } catch (error) {
@@ -70,7 +81,7 @@ export const postVerifyEmail=async(otp)=>{
       email:storedEmail,
       OTP:otp
     })
-    return {success:true,message:res.data.message}
+    return {success:true,data:res.data}
   } catch (error) {
     return {success:false,message:error.response.data.message}
   }

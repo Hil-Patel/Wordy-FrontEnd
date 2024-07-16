@@ -17,11 +17,11 @@ const AuthenticationLogin = ({ setOpenPage, setToken, token,setLoading }) => {
       const res = await LogInApi(values);
       setLoading(false)
       if (res.success) {
+        navigate("/options")
         toast.success(res.message);
       } else {
         toast.error(res.message);
       }
-      navigate("/options")
     },
   });
 

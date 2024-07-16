@@ -14,7 +14,6 @@ const AppRoute = () => {
     if (localStorage.getItem("ResetToken")) {
       setToken(localStorage.getItem("ResetToken"));
     }
-    console.log(token);
   });
 
   return (

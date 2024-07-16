@@ -1,19 +1,23 @@
 import axios from "axios";
 import { useFormik } from "formik";
 import { SignUp } from "../schema/SignUpSchema";
-import { SignUpApi,preVerifyEmail } from "../ApiEndPoints/index.js";
+import {
+  SignUpApi,
+  preVerifyEmail,
+  verifyEmail,
+} from "../ApiEndPoints/index.js";
 import { toast } from "react-toastify";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faCircleCheck,
   faCircleXmark,
 } from "@fortawesome/free-regular-svg-icons";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const AuthenticationSignUp = ({ setOpenPage, setLoading }) => {
   const [EmailVerified, setEmailVerified] = useState(false);
-  const navigate=useNavigate();
+  const navigate = useNavigate();
   const formik = useFormik({
     initialValues: {
       username: "",
@@ -35,22 +39,55 @@ const AuthenticationSignUp = ({ setOpenPage, setLoading }) => {
     },
   });
 
-  const handleVerifyEmail = async(e) => {
+  const handleVerifyEmail = async (e) => {
     e.preventDefault();
     setLoading(true);
-    const res=await preVerifyEmail(formik.values.email)
-    if (res.success) {
-      if(res.data.verified){
+    const ress = await verifyEmail(formik.values.email);
+    if (ress.success) {
+      if (ress.data.verified) {
         setEmailVerified(true);
+        toast.success(ress.data.message);
+      } else {
+        const res = await preVerifyEmail(formik.values.email);
+        if (res.success) {
+          if (res.data.verified) {
+            setEmailVerified(true);
+            toast.success(res.data.message);
+          } else {
+            toast.success(res.data.message);
+            navigate("/verify-Email");
+          }
+        } else {
+          toast.error(res.message);
+        }
       }
-      else{
-        navigate("/verify-Email")
+    }else {
+      toast.error(ress.message);
+    }
+
+    setLoading(false);
+  };
+
+  const checkEmail = async () => {
+    const res = await verifyEmail(formik.values.email);
+    if (res.success) {
+      if (res.data.verified) {
+        setEmailVerified(true);
+        toast.success(res.data.message);
       }
     } else {
       toast.error(res.message);
     }
-    setLoading(false);
   };
+  useEffect(() => {
+    if (formik.values.email && !formik.errors.email) {
+      console.log("caught");
+
+      setLoading(true);
+      checkEmail();
+      setLoading(false);
+    }
+  }, []);
 
   return (
     <div className="w-1/2 my-auto">
@@ -196,7 +233,9 @@ const AuthenticationSignUp = ({ setOpenPage, setLoading }) => {
           Sign Up
         </button>
         <button
-          onClick={(e) => {handleVerifyEmail(e)}}
+          onClick={(e) => {
+            handleVerifyEmail(e);
+          }}
           className={`${
             EmailVerified ? "hidden" : "block"
           } text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800`}

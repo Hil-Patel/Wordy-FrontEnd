@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, {  useState } from "react";
 import Navbar from "../component/Navbar";
 import OtpInput from "react-otp-input";
 import { useNavigate } from "react-router-dom";
@@ -13,22 +13,22 @@ const VerifyEmail = () => {
 
   const handleSubmit=async()=>{
     setLoading(true);
-    const res=await postVerifyEmail(otp)
+    const res=await postVerifyEmail(otp)    
     if(res.success){
         if(res.data.verified){
             toast.success(res.data.message)
+            localStorage.setItem("EmailToVerify","")
             navigate("/authenticate")
         }
         else{
             toast.success(res.data.message)
         }
-
     }else{
         toast.error(res.message)
     }
     setLoading(false)
   }
-  
+
   return (
     <div className="h-screen flex flex-col transition-colors duration-500 ">
       <Navbar />
