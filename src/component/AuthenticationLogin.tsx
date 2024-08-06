@@ -1,10 +1,19 @@
 import { useFormik } from "formik";
-import axios from "axios";
-import { Login } from "../schema/LogInSchema.js";
-import { LogInApi, ForgetPassword } from "../ApiEndPoints/index.js";
+import { Login } from "../schema/LogInSchema";
+import { LogInApi, ForgetPassword } from "../ApiEndPoints";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
-const AuthenticationLogin = ({ setOpenPage, setToken, token,setLoading }) => {
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEye, faEyeSlash } from "@fortawesome/free-regular-svg-icons";
+import { useState } from "react";
+
+interface AuthenticationLoginProps {
+  setOpenPage: (page: string) => void;
+  setToken: (token: string) => void;
+  setLoading: (loading: boolean) => void;
+}
+
+const AuthenticationLogin: React.FC<AuthenticationLoginProps> = ({ setOpenPage, setToken, setLoading }) => {
   const navigate = useNavigate();
   const formik = useFormik({
     initialValues: {
@@ -13,11 +22,11 @@ const AuthenticationLogin = ({ setOpenPage, setToken, token,setLoading }) => {
     },
     validationSchema: Login,
     onSubmit: async (values) => {
-      setLoading(true)
+      setLoading(true);
       const res = await LogInApi(values);
-      setLoading(false)
+      setLoading(false);
       if (res.success) {
-        navigate("/options")
+        navigate("/options");
         toast.success(res.message);
       } else {
         toast.error(res.message);
@@ -26,16 +35,14 @@ const AuthenticationLogin = ({ setOpenPage, setToken, token,setLoading }) => {
   });
 
   const handleForgetPassword = async () => {
-    console.log(formik.values.email);
-
     if (formik.values.email) {
-      setLoading(true)
+      setLoading(true);
       const res = await ForgetPassword(formik.values.email);
-      setLoading(false)
+      setLoading(false);
       if (res.success) {
         toast.success(res.data.message);
         setToken(res.data.resetPasswordToken);
-        localStorage.setItem("ResetToken",res.data.resetPasswordToken)
+        localStorage.setItem("ResetToken", res.data.resetPasswordToken);
       } else {
         toast.error(res.message);
       }
@@ -43,9 +50,16 @@ const AuthenticationLogin = ({ setOpenPage, setToken, token,setLoading }) => {
       toast.error("Email is required");
     }
   };
+
+  const [showPassword, setShowPassword] = useState(false);
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
+
   return (
     <div className="w-1/2 my-auto">
-      <div className="text-center mb-5 font-bold">LOG IN</div>
+      <div className="text-xl text-center mb-5 font-bold">LOG IN</div>
       <form className="max-w-sm mx-auto" onSubmit={formik.handleSubmit} autoComplete="off">
         <div className="relative z-0 mb-3">
           <input
@@ -70,15 +84,14 @@ const AuthenticationLogin = ({ setOpenPage, setToken, token,setLoading }) => {
           ) : null}
         </div>
         <div className="relative z-0 mb-5">
-          
           <input
-            type="password"
+            type={showPassword ? "text" : "password"}
             name="password"
-            placeholder=""
             value={formik.values.password}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+            placeholder=" "
           />
           <label
             htmlFor="password"
@@ -91,10 +104,17 @@ const AuthenticationLogin = ({ setOpenPage, setToken, token,setLoading }) => {
               {formik.errors.password}
             </div>
           ) : null}
+          <button
+            type="button"
+            onClick={togglePasswordVisibility}
+            className="absolute right-0 top-1 mt-4 transform -translate-y-1/2 text-gray-600 dark:text-gray-400 focus:outline-none"
+          >
+            {showPassword ? <FontAwesomeIcon icon={faEye} /> : <FontAwesomeIcon icon={faEyeSlash} />}
+          </button>
         </div>
         <div className="flex justify-between text-xs">
-          <div className="flex items-center mb-3 ">
-            Don't have Account?{" "}
+          <div className="flex items-center mb-3">
+            Don't have an account?{" "}
             <div
               className="text-blue-800 dark:text-blue-400 ml-2 cursor-pointer"
               onClick={() => {
@@ -106,9 +126,7 @@ const AuthenticationLogin = ({ setOpenPage, setToken, token,setLoading }) => {
           </div>
           <div
             className="mr-2 text-blue-800 dark:text-blue-400 cursor-pointer"
-            onClick={() => {
-              handleForgetPassword();
-            }}
+            onClick={handleForgetPassword}
           >
             Forget Password?
           </div>

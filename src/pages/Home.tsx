@@ -10,7 +10,7 @@ const Home = ({ setButtonClick }) => {
   
   return (
     <div className="h-screen flex flex-col transition-colors duration-500 ">
-      <Navbar />
+      <Navbar isLoggedIn={false}/>
       <HowToPlay setButtonClick={setButtonClick}/>
     </div>
   );

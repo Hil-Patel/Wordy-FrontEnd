@@ -5,13 +5,13 @@ import image from "../assets/wordy.png";
 import AuthenticationSignUp from "../component/AuthenticationSignUp";
 import { BeatLoader } from "react-spinners";
 
-const Authentication = ({ page, setToken, token }) => {
+const Authentication = ({ page, setToken }) => {
   const [loading, setLoading] = useState(false);
   const [openPage, setOpenPage] = useState(page);
 
   return (
     <div className=" relative flex flex-col h-screen dark:bg-gray-700 text-black dark:text-white transition-colors duration-500">
-      <Navbar />
+      <Navbar isLoggedIn={false}/>
       {loading ? (
         <div className="absolute inset-0 bg-black bg-opacity-75 flex justify-center items-center z-50">
         <BeatLoader color="#ffffff"/>
@@ -22,7 +22,6 @@ const Authentication = ({ page, setToken, token }) => {
           <AuthenticationLogin
             setOpenPage={setOpenPage}
             setToken={setToken}
-            token={token}
             setLoading={setLoading}
           />
           <AuthenticationSignUp

@@ -30,10 +30,11 @@ const VerifyEmail = () => {
     }
     setLoading(false)
   }
+  const email=localStorage.getItem("EmailToVerify")
 
   return (
     <div className="h-screen flex flex-col transition-colors duration-500 ">
-      <Navbar />
+      <Navbar isLoggedIn={false}/>
       {loading ? (
         <div className="absolute inset-0 bg-black bg-opacity-75 flex justify-center items-center z-50">
           <BeatLoader color="#ffffff" />
@@ -41,6 +42,7 @@ const VerifyEmail = () => {
       ) : null}
       <div className="flex flex-col flex-grow justify-center items-center bg-gray-100 dark:bg-gray-700 transition-colors duration-500">
         <div className="w-1/3 py-8 bg-blue-100 dark:bg-gray-800 rounded text-black dark:text-white flex flex-col gap-5 items-center">
+        <p>An OTP is sended on your email {email?.slice(0,2)}...@{email?.split('@')[1]}</p>
           <OtpInput
             value={otp}
             onChange={setOtp}

@@ -26,11 +26,11 @@ const AppRoute = () => {
             <Authentication
               page={buttonClick}
               setToken={setToken}
-              token={token}
             />
           }
         />
-        {token != "" && (
+        {/* token != "" && */}
+        { (
           <Route
             path={`/reset/${token}`}
             element={<ResetPassword setButtonClick={setButtonClick} />}

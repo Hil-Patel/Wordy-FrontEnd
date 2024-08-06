@@ -11,12 +11,16 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faCircleCheck,
   faCircleXmark,
+  faEye,
+  faEyeSlash,
 } from "@fortawesome/free-regular-svg-icons";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const AuthenticationSignUp = ({ setOpenPage, setLoading }) => {
   const [EmailVerified, setEmailVerified] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const navigate = useNavigate();
   const formik = useFormik({
     initialValues: {
@@ -41,13 +45,14 @@ const AuthenticationSignUp = ({ setOpenPage, setLoading }) => {
 
   const handleVerifyEmail = async (e) => {
     e.preventDefault();
-    
+
     setLoading(true);
     const ress = await verifyEmail(formik.values.email);
     if (ress.success) {
       if (ress.data.verified) {
         setEmailVerified(true);
         toast.success(ress.data.message);
+
       } else {
         const res = await preVerifyEmail(formik.values.email);
         if (res.success) {
@@ -90,9 +95,17 @@ const AuthenticationSignUp = ({ setOpenPage, setLoading }) => {
     }
   }, []);
 
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
+  const toggleConfirmPasswordVisibility = () => {
+    setShowConfirmPassword(!showConfirmPassword);
+  };
+
   return (
     <div className="w-1/2 my-auto">
-      <div className="text-center mb-5 font-bold">SIGN UP</div>
+      <div className="text-xl text-center mb-5 font-bold">SIGN UP</div>
       <form
         className="max-w-sm mx-auto"
         onSubmit={formik.handleSubmit}
@@ -107,6 +120,7 @@ const AuthenticationSignUp = ({ setOpenPage, setLoading }) => {
             onBlur={formik.handleBlur}
             className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
             placeholder=""
+            disabled={EmailVerified}
           />
           <label
             htmlFor="email"
@@ -166,7 +180,7 @@ const AuthenticationSignUp = ({ setOpenPage, setLoading }) => {
         </div>
         <div className="relative z-0 mb-3">
           <input
-            type="password"
+            type={showPassword?"text":"password"}
             name="password"
             placeholder=""
             value={formik.values.password}
@@ -188,10 +202,17 @@ const AuthenticationSignUp = ({ setOpenPage, setLoading }) => {
               {formik.errors.password}
             </div>
           ) : null}
+          <button
+                type="button"
+                onClick={togglePasswordVisibility}
+                className="absolute right-0 top-1 mt-4 transform -translate-y-1/2 text-gray-600 dark:text-gray-400 focus:outline-none"
+              >
+                {showPassword ? <FontAwesomeIcon icon={faEye} /> : <FontAwesomeIcon icon={faEyeSlash} />}
+              </button>
         </div>
         <div className="relative z-0 mb-5">
           <input
-            type="password"
+            type={showConfirmPassword?"text":"password"}
             name="confirmpassword"
             placeholder=""
             value={formik.values.confirmpassword}
@@ -213,6 +234,13 @@ const AuthenticationSignUp = ({ setOpenPage, setLoading }) => {
               {formik.errors.confirmpassword}
             </div>
           ) : null}
+          <button
+                type="button"
+                onClick={toggleConfirmPasswordVisibility}
+                className="absolute right-0 top-1 mt-4 transform -translate-y-1/2 text-gray-600 dark:text-gray-400 focus:outline-none"
+              >
+                {showPassword ? <FontAwesomeIcon icon={faEye} /> : <FontAwesomeIcon icon={faEyeSlash} />}
+              </button>
         </div>
         <div className="flex items-center mb-3 text-xs">
           Already have Account?{" "}
